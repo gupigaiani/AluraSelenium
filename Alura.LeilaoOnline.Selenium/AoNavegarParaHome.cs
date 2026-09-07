@@ -1,3 +1,4 @@
+using Alura.LeilaoOnline.Selenium.Fixtures;
 using Alura.LeilaoOnline.Selenium.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -5,14 +6,19 @@ using System.Reflection;
 
 namespace Alura.LeilaoOnline.Selenium
 {
-    public class AoNavegarParaHome
+    public class AoNavegarParaHome : IClassFixture<TestFixture>
     {
+        private IWebDriver driver;
+
+        // Setup
+        public AoNavegarParaHome(TestFixture fixture)
+        {
+            driver = fixture.Driver;
+        }
+
         [Fact]
         public void DadoChromeAbertoDeveMostrarLeiloesNoTitulo()
         {
-            // arrange
-            IWebDriver driver = new ChromeDriver(TestHelper.PastaDoExecutavel);
-
             // act
             driver.Navigate().GoToUrl("http://localhost:51128");
 
@@ -23,9 +29,6 @@ namespace Alura.LeilaoOnline.Selenium
         [Fact]
         public void DadoChromeAbertoDeveMostrarProximosLeiloesNaPagina()
         {
-            // arrange
-            IWebDriver driver = new ChromeDriver(TestHelper.PastaDoExecutavel);
-
             // act
             driver.Navigate().GoToUrl("http://localhost:51128");
 
